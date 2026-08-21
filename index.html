@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Carol e Caio | Casamento</title>
+<title>Caroline e Caio | Casamento</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&family=Alex+Brush&display=swap" rel="stylesheet">
@@ -20,7 +20,7 @@
     --card:#ffffff;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth;overflow-x:hidden;}
   body{
     background:var(--bg);
     color:var(--ink);
@@ -153,7 +153,17 @@
     scroll-margin-top:120px;
   }
   section:not(.hero){
+    position:relative;
     border-top:1px solid var(--line);
+  }
+  section:not(.hero):nth-of-type(odd)::before{
+    content:"";
+    position:absolute;
+    top:0;bottom:0;
+    left:50%;right:50%;
+    margin-left:-50vw;margin-right:-50vw;
+    background:#d3d2cd;
+    z-index:-1;
   }
   .hero{scroll-margin-top:0;}
   .intro{scroll-margin-top:120px;}
@@ -188,49 +198,33 @@
   }
 
   /* Countdown */
-  :root{
-    --sage:#4a6449;
-  }
   .countdown-section{
-    max-width:760px;margin:70px auto 0;
+    max-width:640px;margin:70px auto 0;
     padding:0 24px;
   }
-  .countdown-line{
-    height:1px;
-    background:linear-gradient(to right, transparent, var(--accent) 15%, var(--accent) 85%, transparent);
-  }
-  .countdown-row{
-    display:flex;align-items:center;justify-content:center;
-    gap:36px;flex-wrap:wrap;
-    padding:30px 0;
-  }
-  .faltam{
-    font-family:'Alex Brush',cursive;
-    font-size:2.6rem;
-    color:var(--sage);
-    line-height:1;
-  }
-  .cd-divider{
-    width:1px;align-self:stretch;
-    background:var(--line);
-    display:block;
-  }
   .countdown{
-    display:flex;justify-content:center;gap:34px;flex-wrap:wrap;
+    display:grid;grid-template-columns:repeat(4,1fr);
+    gap:20px;
   }
   .countdown div{text-align:center;}
+  .countdown .num-line{
+    height:1px;
+    background:var(--accent);
+    margin-bottom:22px;
+  }
   .countdown .num{
     font-family:'Cormorant Garamond',serif;
-    font-size:2.4rem;font-weight:600;
-    color:var(--sage);
+    font-size:2.6rem;font-weight:400;
+    color:var(--accent-dark);
+    line-height:1;
   }
   .countdown .label{
-    font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--sage);
-    opacity:.8;
+    margin-top:14px;
+    font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);
   }
-  @media(max-width:640px){
-    .countdown-row{gap:20px;}
-    .cd-divider{display:none;}
+  @media(max-width:520px){
+    .countdown{gap:10px;}
+    .countdown .num{font-size:1.7rem;}
   }
 
   /* Story */
@@ -255,36 +249,36 @@
   .story .sign{display:block;margin-top:20px;color:var(--accent-dark);font-style:italic;}
   @media(max-width:800px){.story{grid-template-columns:1fr;}}
 
-  /* Programação / info cards */
-  .info-grid{
-    display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:28px;
+  /* Local do evento */
+  #local{text-align:center;}
+  #local .eyebrow{
+    text-transform:uppercase;
+    letter-spacing:.3em;
+    font-size:.75rem;
+    margin-bottom:14px;
+    color:var(--accent);
   }
-  .info-card{
-    background:var(--card);
-    border:1px solid var(--line);
-    padding:36px 30px;
-    text-align:center;
-    border-radius:6px;
-  }
-  .info-card h3{
+  .local-datetime{
+    font-family:'Montserrat',sans-serif;
+    font-weight:600;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    font-size:1.05rem;
     color:var(--accent-dark);
-    font-size:1.4rem;
-    margin-bottom:12px;
+    margin-bottom:40px;
   }
-  .info-card p{color:var(--muted);font-size:.92rem;}
-  .info-card .icon{
-    width:44px;height:44px;margin:0 auto 18px;
-    border:1px solid var(--accent);
-    border-radius:50%;
-    display:flex;align-items:center;justify-content:center;
-    color:var(--accent-dark);
+  .local-illustration{
+    max-width:420px;width:100%;margin:0 auto 36px;
+  }
+  .local-venue{
     font-family:'Cormorant Garamond',serif;
-    font-size:1.3rem;
+    font-style:italic;
+    font-size:1.6rem;
+    color:var(--ink);
+    margin-bottom:8px;
   }
+  #local .section-sub{margin-bottom:36px;}
 
-  /* Alt section bg */
-  .alt-bg{background:var(--card);}
 
   .btn{
     display:inline-block;
@@ -347,7 +341,7 @@
       <ul id="navMenu">
         <li><a href="#home">Home</a></li>
         <li><a href="#historia">Nossa História</a></li>
-        <li><a href="#programacao">Programação</a></li>
+        <li><a href="#local">Local</a></li>
         <li><a href="#galeria">Galeria</a></li>
         <li><a href="#lista-presentes">Presentes</a></li>
         <li><a href="#rsvp">RSVP</a></li>
@@ -363,7 +357,7 @@
 
 <section id="intro" class="intro">
   <p class="eyebrow">Estamos nos casando</p>
-  <h1>Carol &amp; Caio</h1>
+  <h1>Caroline &amp; Caio</h1>
   <p class="date">17 de Outubro de 2026</p>
 </section>
 
@@ -374,21 +368,16 @@
     Criamos este site para compartilhar as informações do nosso grande dia.
     Esperamos que vocês aproveitem e que seja um dia inesquecível.
     A presença de cada um de vocês é muito importante para nós!
-    <span class="sign">Com carinho, Carol &amp; Caio</span>
+    <span class="sign">Com carinho, Caroline &amp; Caio</span>
   </p>
 
   <div class="countdown-section">
-    <div class="countdown-line"></div>
-    <div class="countdown-row">
-      <span class="faltam">Faltam</span>
-      <span class="cd-divider"></span>
-      <div class="countdown" id="countdown">
-        <div><div class="num" id="cd-days">00</div><div class="label">Dias</div></div>
-        <div><div class="num" id="cd-hours">00</div><div class="label">Horas</div></div>
-        <div><div class="num" id="cd-min">00</div><div class="label">Mins.</div></div>
-      </div>
+    <div class="countdown" id="countdown">
+      <div><div class="num-line"></div><div class="num" id="cd-days">00</div><div class="label">Dias</div></div>
+      <div><div class="num-line"></div><div class="num" id="cd-hours">00</div><div class="label">Horas</div></div>
+      <div><div class="num-line"></div><div class="num" id="cd-min">00</div><div class="label">Minutos</div></div>
+      <div><div class="num-line"></div><div class="num" id="cd-sec">00</div><div class="label">Segundos</div></div>
     </div>
-    <div class="countdown-line"></div>
   </div>
 </section>
 
@@ -403,36 +392,18 @@
         e por que escolheram este lugar para celebrar o começo dessa nova fase.
         Um trecho contado com carinho, como uma carta para quem estará presente nesse dia."
       </blockquote>
-      <span class="sign">Carol &amp; Caio</span>
+      <span class="sign">Caroline &amp; Caio</span>
     </div>
   </div>
 </section>
 
-<section id="programacao" class="alt-bg">
-  <h2 class="section-title">Programação</h2>
-  <p class="section-sub">Confira as informações sobre a cerimônia, traje e como chegar.</p>
-  <div class="info-grid">
-    <div class="info-card">
-      <div class="icon">&#9835;</div>
-      <h3>Cerimônia</h3>
-      <p>17.10.2026 &nbsp;|&nbsp; às 00h00<br>Nome do local<br>Endereço completo aqui</p>
-    </div>
-    <div class="info-card">
-      <div class="icon">&#9825;</div>
-      <h3>Traje</h3>
-      <p>Passeio completo<br>Sugestão de cores e estilo para os convidados</p>
-    </div>
-    <div class="info-card">
-      <div class="icon">&#8618;</div>
-      <h3>Transporte</h3>
-      <p>Informações sobre transfer, horários de saída e retorno</p>
-    </div>
-    <div class="info-card">
-      <div class="icon">&#9737;</div>
-      <h3>Como Chegar</h3>
-      <p>Principais rotas de acesso e recomendação de uso de aplicativos de navegação</p>
-    </div>
-  </div>
+<section id="local">
+  <p class="eyebrow">Local do Evento</p>
+  <p class="local-datetime">17 de Outubro de 2026 &ndash; 18h</p>
+  <img class="local-illustration" src="assets/geral/sketch01.png" alt="Ilustração do local">
+  <p class="local-venue">Nome do Local</p>
+  <p class="section-sub">Endereço completo aqui</p>
+  <a href="#" class="btn">Como Chegar</a>
 </section>
 
 <section id="galeria">
@@ -459,7 +430,7 @@
 </section>
 
 <footer>
-  <div class="script">Carol &amp; Caio</div>
+  <div class="script">Caroline &amp; Caio</div>
   <p>&copy; 2026 &mdash; Feito com amor para o nosso grande dia.</p>
 </footer>
 
@@ -493,19 +464,21 @@
     var days = Math.floor(diff / (1000*60*60*24));
     var hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
     var mins = Math.floor((diff % (1000*60*60)) / (1000*60));
+    var secs = Math.floor((diff % (1000*60)) / 1000);
     document.getElementById('cd-days').textContent = String(days).padStart(2,'0');
     document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
     document.getElementById('cd-min').textContent = String(mins).padStart(2,'0');
+    document.getElementById('cd-sec').textContent = String(secs).padStart(2,'0');
   }
   updateCountdown();
-  setInterval(updateCountdown, 60000);
+  setInterval(updateCountdown, 1000);
 
   // Galeria - carrega automaticamente assets/galeria/foto01.jpg, foto02.jpg, ...
   // Mostra só as 6 primeiras; se houver mais, exibe o botão "Ver Mais Fotos"
   (function(){
     var grid = document.getElementById('galleryGrid');
     var moreBtn = document.getElementById('galleryMoreBtn');
-    var VISIBLE_LIMIT = 6;
+    var VISIBLE_LIMIT = 3;
     var srcs = [];
     var i = 1;
     function pad(n){ return n < 10 ? '0' + n : String(n); }
