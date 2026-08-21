@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carol e Caio | Casamento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&family=Alex+Brush&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#dad9d4;
+    --ink:#696969;
+    --muted:#696969;
+    --accent:#696969;
+    --accent-dark:#696969;
+    --btn:#777777;
+    --btn-hover:#616161;
+    --line:#e3dccf;
+    --card:#ffffff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Montserrat',sans-serif;
+    font-weight:300;
+    line-height:1.7;
+  }
+  h1,h2,h3,.script{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:500;
+    letter-spacing:.02em;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+
+  /* Header / nav */
+  header{
+    position:fixed;top:0;left:0;right:0;
+    background:rgba(218,217,212,.92);
+    backdrop-filter:blur(6px);
+    z-index:100;
+    border-bottom:1px solid var(--line);
+  }
+  .nav-wrap{
+    max-width:1100px;margin:0 auto;
+    display:flex;flex-direction:column;align-items:center;
+    padding:18px 24px 10px;
+    position:relative;
+  }
+  .logo{
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.8rem;
+    letter-spacing:.3em;
+    color:var(--accent-dark);
+    margin-bottom:14px;
+  }
+  .nav-toggle{
+    display:none;background:none;border:0;font-size:1.4rem;cursor:pointer;color:var(--ink);
+    position:absolute;top:18px;right:24px;
+  }
+  nav{width:100%;}
+  nav ul{
+    list-style:none;
+    display:flex;justify-content:center;gap:28px;
+    padding-bottom:12px;
+  }
+  nav a{
+    font-size:.72rem;
+    text-transform:uppercase;
+    letter-spacing:.12em;
+    color:var(--ink);
+    transition:color .2s;
+  }
+  nav a:hover{color:var(--accent);}
+
+  @media(max-width:800px){
+    .nav-toggle{display:block;}
+    nav ul{
+      flex-direction:column;
+      align-items:center;
+      gap:0;
+      max-height:0;overflow:hidden;
+      transition:max-height .3s ease;
+      padding-bottom:0;
+    }
+    nav ul.open{max-height:400px;padding-bottom:12px;}
+    nav ul li{width:100%;text-align:center;}
+    nav ul a{display:block;padding:14px 0;}
+  }
+
+  /* Hero */
+  .hero{
+    height:100vh;
+    min-height:600px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    position:relative;
+    background:
+      linear-gradient(rgba(47,43,38,.35), rgba(47,43,38,.35)),
+      linear-gradient(135deg,#d8c7a8,#efe6d6 60%,#cbb894);
+    color:#fff;
+  }
+  .hero-video-placeholder{
+    width:100%;height:100%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:1.2rem;
+    color:rgba(255,255,255,.85);
+  }
+  .scroll-hint{
+    position:absolute;bottom:30px;left:50%;transform:translateX(-50%);
+    font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
+    opacity:.85;
+    color:#fff;
+  }
+
+  /* Intro (Estamos nos casando) */
+  .intro{
+    text-align:center;
+    padding-top:90px;
+    padding-bottom:60px;
+  }
+  .intro p.eyebrow{
+    text-transform:uppercase;
+    letter-spacing:.3em;
+    font-size:.75rem;
+    margin-bottom:18px;
+    color:var(--accent-dark);
+  }
+  .intro h1{
+    font-size:clamp(2.4rem,6vw,4.2rem);
+    line-height:1;
+    color:var(--ink);
+  }
+  .intro .date{
+    margin-top:22px;
+    font-size:1.05rem;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+
+  section{
+    padding:100px 24px;
+    max-width:1100px;
+    margin:0 auto;
+    scroll-margin-top:120px;
+  }
+  section:not(.hero){
+    border-top:1px solid var(--line);
+  }
+  .hero{scroll-margin-top:0;}
+  .intro{scroll-margin-top:120px;}
+  .section-title{
+    text-align:center;
+    margin-bottom:12px;
+    font-size:clamp(2rem,4vw,2.8rem);
+    color:var(--accent-dark);
+  }
+  .section-sub{
+    text-align:center;
+    color:var(--muted);
+    max-width:640px;
+    margin:0 auto 50px;
+    font-size:.95rem;
+  }
+  .divider{
+    width:60px;height:1px;background:var(--accent);
+    margin:0 auto 50px;
+  }
+
+  /* Welcome message */
+  .welcome-text{
+    max-width:680px;margin:0 auto;text-align:center;
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.35rem;
+    color:var(--ink);
+  }
+  .welcome-text .sign{
+    display:block;margin-top:26px;
+    font-style:italic;color:var(--accent-dark);
+  }
+
+  /* Countdown */
+  :root{
+    --sage:#4a6449;
+  }
+  .countdown-section{
+    max-width:760px;margin:70px auto 0;
+    padding:0 24px;
+  }
+  .countdown-line{
+    height:1px;
+    background:linear-gradient(to right, transparent, var(--accent) 15%, var(--accent) 85%, transparent);
+  }
+  .countdown-row{
+    display:flex;align-items:center;justify-content:center;
+    gap:36px;flex-wrap:wrap;
+    padding:30px 0;
+  }
+  .faltam{
+    font-family:'Alex Brush',cursive;
+    font-size:2.6rem;
+    color:var(--sage);
+    line-height:1;
+  }
+  .cd-divider{
+    width:1px;align-self:stretch;
+    background:var(--line);
+    display:block;
+  }
+  .countdown{
+    display:flex;justify-content:center;gap:34px;flex-wrap:wrap;
+  }
+  .countdown div{text-align:center;}
+  .countdown .num{
+    font-family:'Cormorant Garamond',serif;
+    font-size:2.4rem;font-weight:600;
+    color:var(--sage);
+  }
+  .countdown .label{
+    font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--sage);
+    opacity:.8;
+  }
+  @media(max-width:640px){
+    .countdown-row{gap:20px;}
+    .cd-divider{display:none;}
+  }
+
+  /* Story */
+  .story{
+    display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;
+  }
+  .story img{border-radius:4px;}
+  .story .ph{
+    aspect-ratio:4/5;
+    background:linear-gradient(135deg,#e9ddc6,#cbb894);
+    border-radius:4px;
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-family:'Cormorant Garamond',serif;font-style:italic;
+    text-align:center;padding:20px;
+  }
+  .story blockquote{
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.3rem;
+    font-style:italic;
+    color:var(--ink);
+  }
+  .story .sign{display:block;margin-top:20px;color:var(--accent-dark);font-style:italic;}
+  @media(max-width:800px){.story{grid-template-columns:1fr;}}
+
+  /* Programação / info cards */
+  .info-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:28px;
+  }
+  .info-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    padding:36px 30px;
+    text-align:center;
+    border-radius:6px;
+  }
+  .info-card h3{
+    color:var(--accent-dark);
+    font-size:1.4rem;
+    margin-bottom:12px;
+  }
+  .info-card p{color:var(--muted);font-size:.92rem;}
+  .info-card .icon{
+    width:44px;height:44px;margin:0 auto 18px;
+    border:1px solid var(--accent);
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--accent-dark);
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.3rem;
+  }
+
+  /* Alt section bg */
+  .alt-bg{background:var(--card);}
+
+  /* Hospedagem list */
+  .hotel-list{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:24px;margin-top:10px;
+  }
+  .hotel{
+    border:1px solid var(--line);
+    padding:26px;
+    border-radius:6px;
+    background:var(--bg);
+  }
+  .hotel h4{font-family:'Cormorant Garamond',serif;color:var(--accent-dark);font-size:1.2rem;margin-bottom:8px;}
+  .hotel p{font-size:.88rem;color:var(--muted);}
+
+  .btn{
+    display:inline-block;
+    padding:14px 38px;
+    background:var(--btn);
+    color:#f0f0f0;
+    border:none;
+    border-radius:4px;
+    font-size:.78rem;
+    text-transform:uppercase;
+    letter-spacing:.15em;
+    cursor:pointer;
+    transition:background .2s;
+    align-self:center;
+  }
+  .btn:hover{background:var(--btn-hover);}
+
+  /* Galeria */
+  #galeria{text-align:center;}
+  .gallery-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    gap:24px;
+  }
+  .gallery-grid img{
+    width:100%;
+    aspect-ratio:3/4;
+    object-fit:cover;
+    border-radius:2px;
+    display:block;
+  }
+  @media(max-width:700px){
+    .gallery-grid{grid-template-columns:repeat(2,1fr);}
+  }
+
+  /* Presentes */
+  .gifts{text-align:center;}
+  .gifts p{color:var(--muted);max-width:560px;margin:0 auto 30px;}
+
+  /* Footer */
+  footer{
+    text-align:center;
+    padding:60px 24px 40px;
+    color:var(--muted);
+    font-size:.8rem;
+  }
+  footer .script{
+    font-size:1.8rem;
+    color:var(--accent-dark);
+    margin-bottom:10px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-wrap">
+    <div class="logo">C &amp; C</div>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">&#9776;</button>
+    <nav>
+      <ul id="navMenu">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#historia">Nossa História</a></li>
+        <li><a href="#programacao">Programação</a></li>
+        <li><a href="#hospedagem">Hospedagem</a></li>
+        <li><a href="#galeria">Galeria</a></li>
+        <li><a href="#lista-presentes">Presentes</a></li>
+        <li><a href="#rsvp">RSVP</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section id="home" class="hero" style="padding:0;max-width:none;">
+  <div class="hero-video-placeholder">[ vídeo aqui ]</div>
+  <div class="scroll-hint">Role para baixo &#8595;</div>
+</section>
+
+<section id="intro" class="intro">
+  <p class="eyebrow">Estamos nos casando</p>
+  <h1>Carol &amp; Caio</h1>
+  <p class="date">17 de Outubro de 2026</p>
+</section>
+
+<section class="welcome">
+  <p class="welcome-text">
+    Queridos familiares e amigos,<br><br>
+    Estamos muito felizes e preparando cada detalhe com muito amor e carinho!
+    Criamos este site para compartilhar as informações do nosso grande dia.
+    Esperamos que vocês aproveitem e que seja um dia inesquecível.
+    A presença de cada um de vocês é muito importante para nós!
+    <span class="sign">Com carinho, Carol &amp; Caio</span>
+  </p>
+
+  <div class="countdown-section">
+    <div class="countdown-line"></div>
+    <div class="countdown-row">
+      <span class="faltam">Faltam</span>
+      <span class="cd-divider"></span>
+      <div class="countdown" id="countdown">
+        <div><div class="num" id="cd-days">00</div><div class="label">Dias</div></div>
+        <div><div class="num" id="cd-hours">00</div><div class="label">Horas</div></div>
+        <div><div class="num" id="cd-min">00</div><div class="label">Mins.</div></div>
+      </div>
+    </div>
+    <div class="countdown-line"></div>
+  </div>
+</section>
+
+<section id="historia">
+  <h2 class="section-title">Nossa História</h2>
+  <div class="divider"></div>
+  <div class="story">
+    <div class="ph">[ foto do casal ]</div>
+    <div>
+      <blockquote>
+        "Aqui entra a história de vocês dois — como se conheceram, o que os trouxe até aqui
+        e por que escolheram este lugar para celebrar o começo dessa nova fase.
+        Um trecho contado com carinho, como uma carta para quem estará presente nesse dia."
+      </blockquote>
+      <span class="sign">Carol &amp; Caio</span>
+    </div>
+  </div>
+</section>
+
+<section id="programacao" class="alt-bg">
+  <h2 class="section-title">Programação</h2>
+  <p class="section-sub">Confira as informações sobre a cerimônia, traje e como chegar.</p>
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="icon">&#9835;</div>
+      <h3>Cerimônia</h3>
+      <p>17.10.2026 &nbsp;|&nbsp; às 00h00<br>Nome do local<br>Endereço completo aqui</p>
+    </div>
+    <div class="info-card">
+      <div class="icon">&#9825;</div>
+      <h3>Traje</h3>
+      <p>Passeio completo<br>Sugestão de cores e estilo para os convidados</p>
+    </div>
+    <div class="info-card">
+      <div class="icon">&#8618;</div>
+      <h3>Transporte</h3>
+      <p>Informações sobre transfer, horários de saída e retorno</p>
+    </div>
+    <div class="info-card">
+      <div class="icon">&#9737;</div>
+      <h3>Como Chegar</h3>
+      <p>Principais rotas de acesso e recomendação de uso de aplicativos de navegação</p>
+    </div>
+  </div>
+</section>
+
+<section id="hospedagem">
+  <h2 class="section-title">Hospedagem</h2>
+  <p class="section-sub">Sugestões de hospedagem próximas ao local da festa para maior conforto dos convidados.</p>
+  <div class="hotel-list">
+    <div class="hotel">
+      <h4>Hotel Exemplo 1</h4>
+      <p>Telefone: (00) 00000-0000<br>WhatsApp: clique aqui</p>
+    </div>
+    <div class="hotel">
+      <h4>Hotel Exemplo 2</h4>
+      <p>Telefone: (00) 00000-0000<br>WhatsApp: clique aqui</p>
+    </div>
+    <div class="hotel">
+      <h4>Airbnb / Pousada</h4>
+      <p>Descrição breve, número de quartos e camas</p>
+    </div>
+  </div>
+</section>
+
+<section id="galeria">
+  <h2 class="section-title">Galeria</h2>
+  <div class="divider"></div>
+  <div class="gallery-grid" id="galleryGrid"></div>
+  <a href="#" class="btn" id="galleryMoreBtn" style="display:none;margin-top:40px;">Ver Mais Fotos</a>
+</section>
+
+<section id="lista-presentes" class="alt-bg gifts">
+  <h2 class="section-title">Lista de Presentes</h2>
+  <div class="divider"></div>
+  <p>Sua presença já é o nosso maior presente! Mas, se desejarem nos presentear,
+  preparamos com carinho uma lista especial para ajudar a construir o início da nossa nova vida juntos.</p>
+  <a href="#" class="btn">Lista de Presentes</a>
+</section>
+
+<section id="rsvp" class="gifts">
+  <h2 class="section-title">Confirmação de Presença</h2>
+  <div class="divider"></div>
+  <p>Sua presença é fundamental para nós! Por favor, confirme sua participação
+  preenchendo o formulário abaixo. Isso nos ajudará muito na organização do grande dia.</p>
+  <a href="#" class="btn">Confirmar Presença</a>
+</section>
+
+<footer>
+  <div class="script">Carol &amp; Caio</div>
+  <p>&copy; 2026 &mdash; Feito com amor para o nosso grande dia.</p>
+</footer>
+
+<script>
+  // Menu mobile toggle
+  document.getElementById('navToggle').addEventListener('click', function(){
+    document.getElementById('navMenu').classList.toggle('open');
+  });
+
+  // Rolagem suave até cada seção ao clicar no menu
+  document.querySelectorAll('#navMenu a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var targetId = a.getAttribute('href').slice(1);
+      var target = document.getElementById(targetId);
+      if(target){
+        e.preventDefault();
+        var headerH = document.querySelector('header').offsetHeight;
+        var top = target.getBoundingClientRect().top + window.pageYOffset - headerH;
+        window.scrollTo({top: top, behavior: 'smooth'});
+      }
+      document.getElementById('navMenu').classList.remove('open');
+    });
+  });
+
+  // Countdown - ajuste a data do casamento abaixo
+  var weddingDate = new Date('2026-10-17T18:00:00').getTime();
+  function updateCountdown(){
+    var now = new Date().getTime();
+    var diff = weddingDate - now;
+    if(diff < 0) diff = 0;
+    var days = Math.floor(diff / (1000*60*60*24));
+    var hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+    var mins = Math.floor((diff % (1000*60*60)) / (1000*60));
+    document.getElementById('cd-days').textContent = String(days).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
+    document.getElementById('cd-min').textContent = String(mins).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 60000);
+
+  // Galeria - carrega automaticamente assets/galeria/foto01.jpg, foto02.jpg, ...
+  // Mostra só as 6 primeiras; se houver mais, exibe o botão "Ver Mais Fotos"
+  (function(){
+    var grid = document.getElementById('galleryGrid');
+    var moreBtn = document.getElementById('galleryMoreBtn');
+    var VISIBLE_LIMIT = 6;
+    var srcs = [];
+    var i = 1;
+    function pad(n){ return n < 10 ? '0' + n : String(n); }
+    function render(){
+      grid.innerHTML = '';
+      srcs.forEach(function(src){
+        var el = document.createElement('img');
+        el.src = src;
+        el.alt = 'Foto do casal';
+        el.loading = 'lazy';
+        grid.appendChild(el);
+      });
+    }
+    function tryLoad(){
+      var src = 'assets/galeria/foto' + pad(i) + '.jpg';
+      var img = new Image();
+      img.onload = function(){
+        srcs.push(src);
+        i++;
+        tryLoad();
+      };
+      img.onerror = function(){
+        if(srcs.length > VISIBLE_LIMIT){
+          srcs.length = VISIBLE_LIMIT;
+          moreBtn.style.display = 'inline-block';
+        }
+        render();
+      };
+      img.src = src;
+    }
+    tryLoad();
+    moreBtn.addEventListener('click', function(e){
+      e.preventDefault();
+      i = VISIBLE_LIMIT + 1;
+      moreBtn.style.display = 'none';
+      (function loadRest(){
+        var src = 'assets/galeria/foto' + pad(i) + '.jpg';
+        var img = new Image();
+        img.onload = function(){
+          srcs.push(src);
+          render();
+          i++;
+          loadRest();
+        };
+        img.onerror = function(){};
+        img.src = src;
+      })();
+    });
+  })();
+</script>
+
+</body>
+</html>
