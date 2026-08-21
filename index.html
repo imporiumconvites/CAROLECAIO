@@ -563,7 +563,7 @@
     padding:0;max-width:none;margin:0;
     height:60vh;min-height:380px;
     overflow:hidden;
-    background-size:180% auto;
+    background-size:115% auto;
     background-position:center;
     background-attachment:scroll;
     border-top:none;
@@ -813,7 +813,7 @@
         var winH = window.innerHeight;
         if(rect.bottom > 0 && rect.top < winH){
           var progress = (rect.top) / winH;
-          var offset = progress * 200;
+          var offset = progress * 80;
           el.style.backgroundPosition = 'center calc(50% + ' + offset + 'px)';
         }
       });
