@@ -307,25 +307,30 @@
   /* Intro (Estamos nos casando) */
   .intro{
     text-align:center;
-    padding-top:90px;
-    padding-bottom:60px;
+    min-height:80vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding-top:140px;
+    padding-bottom:80px;
   }
   .intro p.eyebrow{
     text-transform:uppercase;
-    letter-spacing:.3em;
-    font-size:.75rem;
-    margin-bottom:18px;
+    letter-spacing:.35em;
+    font-size:.95rem;
+    margin-bottom:26px;
     color:var(--accent-dark);
   }
   .intro h1{
-    font-size:clamp(2.4rem,6vw,4.2rem);
+    font-size:clamp(3.4rem,9vw,6.4rem);
     line-height:1;
     color:var(--ink);
   }
   .intro .date{
-    margin-top:22px;
-    font-size:1.05rem;
-    letter-spacing:.15em;
+    margin-top:30px;
+    font-size:1.3rem;
+    letter-spacing:.18em;
     text-transform:uppercase;
     color:var(--muted);
   }
@@ -678,13 +683,14 @@
         <li><a href="#historia">Local</a></li>
         <li><a href="#traje">Traje</a></li>
         <li><a href="#rsvp">RSVP</a></li>
-        <li><a href="#galeria">Fotos</a></li>
+        <!-- <li><a href="#galeria">Fotos</a></li> -->
         <li><a href="#lista-presentes">Presentes</a></li>
       </ul>
     </nav>
   </div>
 </header>
 
+<!--
 <section id="home" class="hero" style="padding:0;max-width:none;">
   <div class="hero-video-placeholder"></div>
   <video class="hero-video" id="heroVideo" autoplay muted loop playsinline></video>
@@ -696,6 +702,13 @@
   <button class="mute-toggle" id="muteToggle" aria-label="Ativar som" style="display:none;">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 9 8 9 13 4 13 20 8 15 3 15 3 9"></polygon><line x1="17" y1="9" x2="22" y2="14"></line><line x1="22" y1="9" x2="17" y2="14"></line></svg>
   </button>
+</section>
+-->
+
+<section id="home" class="intro">
+  <p class="eyebrow">Estamos nos casando</p>
+  <h1>Caroline &amp; Caio</h1>
+  <p class="date">17 de Outubro de 2026</p>
 </section>
 
 <section class="welcome">
@@ -738,9 +751,11 @@
   </div>
 </section>
 
+<!--
 <section id="paralax" class="parallax">
   <img class="parallax-img" id="paralaxImg" src="assets/geral/paralax.jpg" alt="" loading="lazy" decoding="async">
 </section>
+-->
 
 <section id="traje">
   <p class="traje-title">Traje</p>
@@ -758,12 +773,14 @@
   <a href="https://felicitous.com.br/site/lista-convidados?id=345604" target="_blank" rel="noopener" class="btn">Confirmar Presença</a>
 </section>
 
+<!--
 <section id="galeria">
   <img src="assets/icone/coracao.png" alt="" class="rsvp-icon" loading="lazy" decoding="async">
   <h2 class="section-title">Nossos momentos</h2>
   <div class="gallery-grid" id="galleryGrid"></div>
   <a href="#" class="btn" id="galleryMoreBtn" style="display:none;margin-top:40px;">Ver Mais Fotos</a>
 </section>
+-->
 
 <section id="lista-presentes" class="alt-bg gifts">
   <svg class="rsvp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
@@ -849,8 +866,9 @@
   // Header transparente sobre o vídeo, sólido ao rolar
   (function(){
     var header = document.querySelector('header');
+    var hasVideoHero = !!document.querySelector('.hero');
     function updateHeader(){
-      if(window.scrollY > 60){
+      if(!hasVideoHero || window.scrollY > 60){
         header.classList.add('scrolled');
       } else {
         header.classList.remove('scrolled');
@@ -901,6 +919,7 @@
   // Vídeo do hero - usa assets/video/videoexemplo.mp4 se o arquivo existir
   (function(){
     var video = document.getElementById('heroVideo');
+    if(!video) return;
     var placeholder = document.querySelector('.hero-video-placeholder');
     var muteBtn = document.getElementById('muteToggle');
     var src = 'assets/video/videoexemplo.mp4';
@@ -925,6 +944,7 @@
   // Mostra só as 3 primeiras; se houver mais, alterna entre "Ver Mais Fotos" e "Ver Menos Fotos"
   (function(){
     var grid = document.getElementById('galleryGrid');
+    if(!grid) return;
     var moreBtn = document.getElementById('galleryMoreBtn');
     var VISIBLE_LIMIT = window.innerWidth <= 800 ? 4 : 3;
     var allSrcs = [];
