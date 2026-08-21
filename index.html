@@ -18,12 +18,12 @@
   }
   :root{
     --bg:#dad9d4;
-    --ink:#696969;
-    --muted:#696969;
-    --accent:#696969;
-    --accent-dark:#696969;
-    --btn:#777777;
-    --btn-hover:#616161;
+    --ink:#3d3d3d;
+    --muted:#4a4a4a;
+    --accent:#3d3d3d;
+    --accent-dark:#2e2e2e;
+    --btn:#3d3d3d;
+    --btn-hover:#242424;
     --line:#e3dccf;
     --card:#ffffff;
   }
@@ -45,9 +45,8 @@
     background-image:url('assets/geral/textura.jpg');
     background-repeat:repeat-y;
     background-size:100% 1400px;
-    filter:contrast(500%) brightness(0.85);
     mix-blend-mode:multiply;
-    opacity:.6;
+    opacity:1;
     pointer-events:none;
   }
   h1,h2,h3,.script{
@@ -374,16 +373,25 @@
   }
   section:not(.hero){
     position:relative;
-    border-top:1px solid var(--line);
   }
-  section:not(.hero):nth-of-type(odd)::before{
+  section:not(.hero)::before{
     content:"";
     position:absolute;
-    top:0;bottom:0;
-    left:50%;right:50%;
-    margin-left:-50vw;margin-right:-50vw;
-    background:#d3d2cd;
-    z-index:-1;
+    top:0;left:50%;
+    transform:translate(-50%,-50%);
+    width:260px;
+    height:1px;
+    background:var(--accent-dark);
+  }
+  section:not(.hero)::after{
+    content:"\25C6\25C6\25C6";
+    display:block;
+    position:absolute;
+    top:0;left:50%;
+    transform:translate(-50%,-50%);
+    font-size:.85rem;
+    color:var(--accent-dark);
+    line-height:1;
   }
   .hero{scroll-margin-top:0;}
   .intro{scroll-margin-top:120px;}
@@ -406,6 +414,11 @@
   }
 
   /* Welcome message */
+  .welcome{
+    border:1px solid #1a1a1a;
+    max-width:900px;
+    padding:80px 60px;
+  }
   .welcome-text{
     max-width:680px;margin:0 auto;text-align:center;
     font-family:'Inter',sans-serif;
@@ -692,8 +705,26 @@
     padding:60px 24px 40px;
     color:var(--muted);
     font-size:.8rem;
-    background:#d3d2cd;
-    border-top:1px solid var(--line);
+    position:relative;
+  }
+  footer::before{
+    content:"";
+    position:absolute;
+    top:0;left:50%;
+    transform:translate(-50%,-50%);
+    width:260px;
+    height:1px;
+    background:var(--accent-dark);
+  }
+  footer::after{
+    content:"\25C6\25C6\25C6";
+    display:block;
+    position:absolute;
+    top:0;left:50%;
+    transform:translate(-50%,-50%);
+    font-size:.85rem;
+    color:var(--accent-dark);
+    line-height:1;
   }
   footer .script{
     font-size:1.8rem;
@@ -712,8 +743,8 @@
       <ul id="navMenu">
         <li><a href="#home">Home</a></li>
         <li><a href="#historia">Local</a></li>
-        <li><a href="#traje">Traje</a></li>
         <li><a href="#rsvp">RSVP</a></li>
+        <li><a href="#traje">Traje</a></li>
         <!-- <li><a href="#galeria">Fotos</a></li> -->
         <li><a href="#lista-presentes">Presentes</a></li>
       </ul>
@@ -793,20 +824,20 @@
 </section>
 -->
 
-<section id="traje">
-  <p class="traje-title">Traje</p>
-  <p class="traje-code">Passeio Completo</p>
-  <div class="traje-illustration-wrap">
-    <img class="traje-illustration" src="assets/geral/traje.webp" alt="Ilustração de traje" loading="lazy" decoding="async">
-  </div>
-</section>
-
 <section id="rsvp" class="gifts">
   <img src="assets/icone/rsvp.png" alt="" class="rsvp-icon" loading="lazy" decoding="async">
   <h2 class="section-title">Rsvp.</h2>
   <p>Sua presença é fundamental para nós! Por favor, confirme sua participação
   preenchendo o formulário abaixo. Isso nos ajudará muito na organização do grande dia.</p>
   <a href="https://felicitous.com.br/site/lista-convidados?id=345604" target="_blank" rel="noopener" class="btn">Confirmar Presença</a>
+</section>
+
+<section id="traje">
+  <p class="traje-title">Traje</p>
+  <p class="traje-code">Passeio Completo</p>
+  <div class="traje-illustration-wrap">
+    <img class="traje-illustration" src="assets/geral/traje.webp" alt="Ilustração de traje" loading="lazy" decoding="async">
+  </div>
 </section>
 
 <!--
