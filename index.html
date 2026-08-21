@@ -562,11 +562,16 @@
   .parallax{
     padding:0;max-width:none;margin:0;
     height:60vh;min-height:380px;
+    position:relative;
     overflow:hidden;
-    background-size:115% auto;
-    background-position:center;
-    background-attachment:scroll;
     border-top:none;
+  }
+  .parallax-img{
+    position:absolute;
+    top:-15%;left:0;
+    width:100%;height:130%;
+    object-fit:cover;
+    will-change:transform;
   }
   section.parallax::before{content:none;}
   @media(max-width:600px){
@@ -733,7 +738,9 @@
   </div>
 </section>
 
-<section id="paralax" class="parallax" style="background-image:url('assets/geral/paralax.jpg');"></section>
+<section id="paralax" class="parallax">
+  <img class="parallax-img" id="paralaxImg" src="assets/geral/paralax.jpg" alt="" loading="lazy" decoding="async">
+</section>
 
 <section id="traje">
   <p class="traje-title">Traje</p>
@@ -803,22 +810,38 @@
     'section:not(#home) > *:not(.countdown-line), .story > *, #countdown > *'
   ).forEach(observeReveal);
 
-  // Efeito parallax via JS (funciona também em mobile, onde background-attachment:fixed falha)
+  // Efeito parallax via JS (transform, com requestAnimationFrame)
   (function(){
-    var els = document.querySelectorAll('.parallax');
-    if(!els.length) return;
+    var img = document.getElementById('paralaxImg');
+    if(!img) return;
+    var section = img.parentElement;
+    var ticking = false;
     function update(){
-      els.forEach(function(el){
-        var rect = el.getBoundingClientRect();
-        var winH = window.innerHeight;
-        if(rect.bottom > 0 && rect.top < winH){
-          var progress = (rect.top) / winH;
-          var offset = progress * 80;
-          el.style.backgroundPosition = 'center calc(50% + ' + offset + 'px)';
+      var rect = section.getBoundingClientRect();
+      var winH = window.innerHeight;
+      var center = rect.top + rect.height / 2;
+      var offset = (winH / 2 - center) * 0.25;
+      img.style.transform = 'translate3d(0,' + offset + 'px,0)';
+      ticking = false;
+    }
+    function onScroll(){
+      if(!ticking){
+        window.requestAnimationFrame(update);
+        ticking = true;
+      }
+    }
+    // Só escuta o scroll enquanto a seção está perto da tela, evitando custo em todo o resto da página
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          update();
+          window.addEventListener('scroll', onScroll, {passive:true});
+        } else {
+          window.removeEventListener('scroll', onScroll);
         }
       });
-    }
-    window.addEventListener('scroll', update, {passive:true});
+    }, {rootMargin:'50% 0px 50% 0px'});
+    io.observe(section);
     window.addEventListener('resize', update);
     update();
   })();
