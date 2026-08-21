@@ -4,9 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Caroline e Caio | Casamento</title>
+<link rel="icon" type="image/png" href="assets/geral/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&family=Alex+Brush&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&family=Alex+Brush&display=swap" rel="stylesheet">
 <style>
   @font-face{
     font-family:'Exmouth';
@@ -31,7 +32,7 @@
   body{
     background:var(--bg);
     color:var(--ink);
-    font-family:'Montserrat',sans-serif;
+    font-family:'Inter',sans-serif;
     font-weight:300;
     line-height:1.7;
   }
@@ -58,11 +59,12 @@
     position:relative;
   }
   .logo{
-    font-family:'Cormorant Garamond',serif;
-    font-size:1.8rem;
-    letter-spacing:.3em;
-    color:var(--accent-dark);
     margin-bottom:14px;
+  }
+  .logo img{
+    height:81px;
+    width:auto;
+    display:block;
   }
   .nav-toggle{
     display:none;background:none;border:0;font-size:1.4rem;cursor:pointer;color:var(--ink);
@@ -76,6 +78,7 @@
   }
   nav a{
     font-size:.72rem;
+    font-weight:400;
     text-transform:uppercase;
     letter-spacing:.12em;
     color:var(--ink);
@@ -202,12 +205,14 @@
   /* Welcome message */
   .welcome-text{
     max-width:680px;margin:0 auto;text-align:center;
-    font-family:'Cormorant Garamond',serif;
-    font-size:1.35rem;
+    font-family:'Inter',sans-serif;
+    font-size:1.1rem;
     color:var(--ink);
   }
   .welcome-text .sign{
     display:block;margin-top:26px;
+    font-family:'Exmouth','Cormorant Garamond',serif;
+    font-size:2.6rem;
     font-style:italic;color:var(--accent-dark);
   }
 
@@ -216,29 +221,46 @@
     max-width:640px;margin:70px auto 0;
     padding:0 24px;
   }
+  .countdown-line{
+    height:1px;
+    background:var(--ink);
+    margin:28px 0;
+  }
+  .countdown-line:first-child{margin-top:0;}
+  .countdown-line:last-child{margin-bottom:0;}
   .countdown{
-    display:grid;grid-template-columns:repeat(4,1fr);
-    gap:20px;
+    display:flex;align-items:center;justify-content:center;gap:36px;
+  }
+  .countdown-faltam{
+    font-family:'Exmouth','Cormorant Garamond',serif;
+    font-size:2.86rem;font-style:italic;
+    color:var(--accent-dark);
+  }
+  .countdown-sep{
+    width:1px;height:56px;
+    background:var(--ink);
+  }
+  .countdown-nums{
+    display:flex;gap:28px;
   }
   .countdown div{text-align:center;}
-  .countdown .num-line{
-    height:1px;
-    background:var(--accent);
-    margin-bottom:22px;
-  }
   .countdown .num{
     font-family:'Cormorant Garamond',serif;
-    font-size:2.6rem;font-weight:400;
+    font-size:2.25rem;font-weight:400;
     color:var(--accent-dark);
     line-height:1;
+    font-variant-numeric:lining-nums;
+    font-feature-settings:"lnum" 1;
   }
   .countdown .label{
-    margin-top:14px;
-    font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);
+    margin-top:2px;
+    font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);
   }
   @media(max-width:520px){
-    .countdown{gap:10px;}
-    .countdown .num{font-size:1.7rem;}
+    .countdown{gap:20px;}
+    .countdown-nums{gap:16px;}
+    .countdown-faltam{font-size:1.5rem;}
+    .countdown .num{font-size:1.4rem;}
   }
 
   /* Story */
@@ -255,13 +277,32 @@
     text-align:center;padding:20px;
   }
   .story blockquote{
-    font-family:'Cormorant Garamond',serif;
-    font-size:1.3rem;
+    font-family:'Inter',sans-serif;
+    font-size:1.05rem;
     font-style:italic;
     color:var(--ink);
   }
   .story .sign{display:block;margin-top:20px;color:var(--accent-dark);font-style:italic;}
   @media(max-width:800px){.story{grid-template-columns:1fr;}}
+
+  .event-info h3{
+    font-family:'Inter',sans-serif;
+    font-size:1rem;font-weight:700;
+    color:var(--accent-dark);
+    margin-bottom:12px;
+  }
+  .event-info p strong{font-weight:700;}
+  .event-info-label{
+    font-weight:700;
+    margin-bottom:12px !important;
+  }
+  .event-info p{
+    font-family:'Inter',sans-serif;
+    font-size:1rem;
+    color:var(--ink);
+    margin-bottom:16px;
+  }
+  .event-info .btn{margin-top:8px;}
 
   /* Local do evento */
   #local{text-align:center;}
@@ -273,7 +314,7 @@
     color:var(--accent);
   }
   .local-datetime{
-    font-family:'Montserrat',sans-serif;
+    font-family:'Inter',sans-serif;
     font-weight:600;
     letter-spacing:.08em;
     text-transform:uppercase;
@@ -347,6 +388,9 @@
   @media(max-width:800px){
     .parallax{background-attachment:scroll;}
   }
+  @media(max-width:600px){
+    .welcome-text .sign{font-size:1.9rem;}
+  }
 
   /* Galeria */
   #galeria{text-align:center;}
@@ -387,13 +431,12 @@
 
 <header>
   <div class="nav-wrap">
-    <div class="logo">C &amp; C</div>
+    <div class="logo"><img src="assets/geral/logo.png" alt="Caroline &amp; Caio"></div>
     <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">&#9776;</button>
     <nav>
       <ul id="navMenu">
         <li><a href="#home">Home</a></li>
-        <li><a href="#historia">Nossa História</a></li>
-        <li><a href="#local">Local</a></li>
+        <li><a href="#historia">Local</a></li>
         <li><a href="#traje">Traje</a></li>
         <li><a href="#rsvp">RSVP</a></li>
         <li><a href="#galeria">Galeria</a></li>
@@ -422,56 +465,48 @@
     Criamos este site para compartilhar as informações do nosso grande dia.
     Esperamos que vocês aproveitem e que seja um dia inesquecível.
     A presença de cada um de vocês é muito importante para nós!
-    <span class="sign">Com carinho, Caroline &amp; Caio</span>
+    <span class="sign">Carol e Caio</span>
   </p>
 
   <div class="countdown-section">
+    <div class="countdown-line"></div>
     <div class="countdown" id="countdown">
-      <div><div class="num-line"></div><div class="num" id="cd-days">00</div><div class="label">Dias</div></div>
-      <div><div class="num-line"></div><div class="num" id="cd-hours">00</div><div class="label">Horas</div></div>
-      <div><div class="num-line"></div><div class="num" id="cd-min">00</div><div class="label">Minutos</div></div>
-      <div><div class="num-line"></div><div class="num" id="cd-sec">00</div><div class="label">Segundos</div></div>
+      <div class="countdown-faltam">Faltam</div>
+      <div class="countdown-sep"></div>
+      <div class="countdown-nums">
+        <div><div class="num" id="cd-days">00</div><div class="label">Dias</div></div>
+        <div><div class="num" id="cd-hours">00</div><div class="label">Horas</div></div>
+        <div><div class="num" id="cd-min">00</div><div class="label">Mins.</div></div>
+      </div>
     </div>
+    <div class="countdown-line"></div>
   </div>
 </section>
 
 <section id="historia">
-  <h2 class="section-title">Nossa História</h2>
-  <div class="divider"></div>
+  <h2 class="section-title">Local do Evento</h2>
   <div class="story">
-    <div class="ph">[ foto do casal ]</div>
-    <div>
-      <blockquote>
-        "Aqui entra a história de vocês dois — como se conheceram, o que os trouxe até aqui
-        e por que escolheram este lugar para celebrar o começo dessa nova fase.
-        Um trecho contado com carinho, como uma carta para quem estará presente nesse dia."
-      </blockquote>
-      <span class="sign">Caroline &amp; Caio</span>
+    <img src="assets/geral/sketch01.png" alt="Ilustração do local">
+    <div class="event-info">
+      <h3>Cerimônia</h3>
+      <p>17 de Outubro de 2026 &ndash; 18h</p>
+      <p class="event-info-label">Endereço</p>
+      <p>Igreja Nossa Senhora da Conceição da Praia<br>Rua da Conceição da Praia, s/n, Comércio, Salvador - BA</p>
+      <a href="https://maps.app.goo.gl/XfFrP45NdToiNo4i7" target="_blank" rel="noopener" class="btn">Como Chegar</a>
     </div>
   </div>
 </section>
 
-<section id="local">
-  <p class="eyebrow">Local do Evento</p>
-  <p class="local-datetime">17 de Outubro de 2026 &ndash; 18h</p>
-  <img class="local-illustration" src="assets/geral/sketch01.png" alt="Ilustração do local">
-  <p class="local-venue">Nome do Local</p>
-  <p class="section-sub">Endereço completo aqui</p>
-  <a href="#" class="btn">Como Chegar</a>
-</section>
+<section id="paralax" class="parallax" style="background-image:url('assets/geral/paralax.jpg');"></section>
 
 <section id="traje">
   <p class="traje-title">Traje</p>
   <p class="traje-code">Passeio Completo</p>
   <img class="traje-illustration" src="assets/geral/traje.png" alt="Ilustração de traje">
-  <div class="divider"></div>
 </section>
 
-<section id="paralax" class="parallax" style="background-image:url('assets/geral/paralax.jpg');"></section>
-
 <section id="rsvp" class="gifts">
-  <h2 class="section-title">Confirmação de Presença</h2>
-  <div class="divider"></div>
+  <h2 class="section-title">Rsvp.</h2>
   <p>Sua presença é fundamental para nós! Por favor, confirme sua participação
   preenchendo o formulário abaixo. Isso nos ajudará muito na organização do grande dia.</p>
   <a href="#" class="btn">Confirmar Presença</a>
@@ -479,17 +514,15 @@
 
 <section id="galeria">
   <h2 class="section-title">Galeria</h2>
-  <div class="divider"></div>
   <div class="gallery-grid" id="galleryGrid"></div>
   <a href="#" class="btn" id="galleryMoreBtn" style="display:none;margin-top:40px;">Ver Mais Fotos</a>
 </section>
 
 <section id="lista-presentes" class="alt-bg gifts">
-  <h2 class="section-title">Lista de Presentes</h2>
-  <div class="divider"></div>
+  <h2 class="section-title">Presentes</h2>
   <p>Sua presença já é o nosso maior presente! Mas, se desejarem nos presentear,
   preparamos com carinho uma lista especial para ajudar a construir o início da nossa nova vida juntos.</p>
-  <a href="#" class="btn">Lista de Presentes</a>
+  <a href="#" class="btn">Lista dos Noivos</a>
 </section>
 
 <footer>
@@ -527,14 +560,12 @@
     var days = Math.floor(diff / (1000*60*60*24));
     var hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
     var mins = Math.floor((diff % (1000*60*60)) / (1000*60));
-    var secs = Math.floor((diff % (1000*60)) / 1000);
     document.getElementById('cd-days').textContent = String(days).padStart(2,'0');
     document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
     document.getElementById('cd-min').textContent = String(mins).padStart(2,'0');
-    document.getElementById('cd-sec').textContent = String(secs).padStart(2,'0');
   }
   updateCountdown();
-  setInterval(updateCountdown, 1000);
+  setInterval(updateCountdown, 1000*30);
 
   // Vídeo do hero - usa assets/geral/hero.mp4 se o arquivo existir
   (function(){
