@@ -105,6 +105,13 @@
       linear-gradient(135deg,#d8c7a8,#efe6d6 60%,#cbb894);
     color:#fff;
   }
+  .hero-video{
+    display:none;
+    position:absolute;top:0;left:0;
+    width:100%;height:100%;
+    object-fit:cover;
+    z-index:0;
+  }
   .hero-video-placeholder{
     width:100%;height:100%;
     display:flex;align-items:center;justify-content:center;
@@ -296,6 +303,30 @@
   }
   .btn:hover{background:var(--btn-hover);}
 
+  /* Traje */
+  #traje{text-align:center;}
+  .traje-title{
+    font-family:'Alex Brush',cursive;
+    font-size:3rem;
+    color:var(--sage,#4a6449);
+    margin-bottom:22px;
+  }
+  .traje-code{
+    text-transform:uppercase;
+    letter-spacing:.15em;
+    font-size:1rem;
+    color:var(--ink);
+    margin-bottom:10px;
+  }
+  .traje-note{
+    font-size:.92rem;
+    color:var(--muted);
+    margin-bottom:36px;
+  }
+  .traje-illustration{
+    max-width:220px;width:100%;margin:0 auto 40px;
+  }
+
   /* Galeria */
   #galeria{text-align:center;}
   .gallery-grid{
@@ -342,9 +373,10 @@
         <li><a href="#home">Home</a></li>
         <li><a href="#historia">Nossa História</a></li>
         <li><a href="#local">Local</a></li>
+        <li><a href="#traje">Traje</a></li>
+        <li><a href="#rsvp">RSVP</a></li>
         <li><a href="#galeria">Galeria</a></li>
         <li><a href="#lista-presentes">Presentes</a></li>
-        <li><a href="#rsvp">RSVP</a></li>
       </ul>
     </nav>
   </div>
@@ -352,6 +384,7 @@
 
 <section id="home" class="hero" style="padding:0;max-width:none;">
   <div class="hero-video-placeholder">[ vídeo aqui ]</div>
+  <video class="hero-video" id="heroVideo" autoplay muted loop playsinline></video>
   <div class="scroll-hint">Role para baixo &#8595;</div>
 </section>
 
@@ -406,6 +439,21 @@
   <a href="#" class="btn">Como Chegar</a>
 </section>
 
+<section id="traje">
+  <p class="traje-title">Traje</p>
+  <p class="traje-code">Passeio Completo</p>
+  <img class="traje-illustration" src="assets/geral/traje.png" alt="Ilustração de traje">
+  <div class="divider"></div>
+</section>
+
+<section id="rsvp" class="gifts">
+  <h2 class="section-title">Confirmação de Presença</h2>
+  <div class="divider"></div>
+  <p>Sua presença é fundamental para nós! Por favor, confirme sua participação
+  preenchendo o formulário abaixo. Isso nos ajudará muito na organização do grande dia.</p>
+  <a href="#" class="btn">Confirmar Presença</a>
+</section>
+
 <section id="galeria">
   <h2 class="section-title">Galeria</h2>
   <div class="divider"></div>
@@ -419,14 +467,6 @@
   <p>Sua presença já é o nosso maior presente! Mas, se desejarem nos presentear,
   preparamos com carinho uma lista especial para ajudar a construir o início da nossa nova vida juntos.</p>
   <a href="#" class="btn">Lista de Presentes</a>
-</section>
-
-<section id="rsvp" class="gifts">
-  <h2 class="section-title">Confirmação de Presença</h2>
-  <div class="divider"></div>
-  <p>Sua presença é fundamental para nós! Por favor, confirme sua participação
-  preenchendo o formulário abaixo. Isso nos ajudará muito na organização do grande dia.</p>
-  <a href="#" class="btn">Confirmar Presença</a>
 </section>
 
 <footer>
@@ -472,6 +512,20 @@
   }
   updateCountdown();
   setInterval(updateCountdown, 1000);
+
+  // Vídeo do hero - usa assets/geral/hero.mp4 se o arquivo existir
+  (function(){
+    var video = document.getElementById('heroVideo');
+    var placeholder = document.querySelector('.hero-video-placeholder');
+    var src = 'assets/geral/hero.mp4';
+    fetch(src, {method:'HEAD'}).then(function(res){
+      if(res.ok){
+        video.src = src;
+        video.style.display = 'block';
+        placeholder.style.display = 'none';
+      }
+    }).catch(function(){});
+  })();
 
   // Galeria - carrega automaticamente assets/galeria/foto01.jpg, foto02.jpg, ...
   // Mostra só as 6 primeiras; se houver mais, exibe o botão "Ver Mais Fotos"
