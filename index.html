@@ -267,7 +267,7 @@
   .story{
     display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;
   }
-  .story img{border-radius:4px;}
+  .story img{border-radius:4px;width:85%;margin:0 auto;}
   .story .ph{
     aspect-ratio:4/5;
     background:linear-gradient(135deg,#e9ddc6,#cbb894);
@@ -392,8 +392,23 @@
     .welcome-text .sign{font-size:1.9rem;}
   }
 
+  /* Animações de entrada */
+  .reveal{
+    opacity:0;
+    transform:translateY(28px);
+    transition:opacity .8s ease, transform .8s ease;
+  }
+  .reveal.in-view{
+    opacity:1;
+    transform:translateY(0);
+  }
+  @media(prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+  }
+
   /* Galeria */
   #galeria{text-align:center;}
+  #galeria .section-title{margin-bottom:50px;}
   .gallery-grid{
     display:grid;grid-template-columns:repeat(3,1fr);
     gap:24px;
@@ -404,7 +419,38 @@
     object-fit:cover;
     border-radius:2px;
     display:block;
+    cursor:pointer;
+    transition:opacity .2s;
   }
+  .gallery-grid img:hover{opacity:.85;}
+
+  /* Lightbox */
+  .lightbox{
+    display:none;
+    position:fixed;inset:0;
+    background:rgba(20,18,15,.92);
+    z-index:1000;
+    align-items:center;justify-content:center;
+    padding:24px;
+  }
+  .lightbox.open{display:flex;}
+  .lightbox img{
+    max-width:90vw;max-height:85vh;
+    object-fit:contain;
+    border-radius:2px;
+  }
+  .lightbox-close{
+    position:absolute;top:20px;right:28px;
+    font-size:2rem;color:#fff;background:none;border:0;
+    cursor:pointer;line-height:1;
+  }
+  .lightbox-prev,.lightbox-next{
+    position:absolute;top:50%;transform:translateY(-50%);
+    font-size:2rem;color:#fff;background:none;border:0;
+    cursor:pointer;padding:12px;
+  }
+  .lightbox-prev{left:8px;}
+  .lightbox-next{right:8px;}
   @media(max-width:700px){
     .gallery-grid{grid-template-columns:repeat(2,1fr);}
   }
@@ -439,7 +485,7 @@
         <li><a href="#historia">Local</a></li>
         <li><a href="#traje">Traje</a></li>
         <li><a href="#rsvp">RSVP</a></li>
-        <li><a href="#galeria">Galeria</a></li>
+        <li><a href="#galeria">Fotos</a></li>
         <li><a href="#lista-presentes">Presentes</a></li>
       </ul>
     </nav>
@@ -465,7 +511,7 @@
     Criamos este site para compartilhar as informações do nosso grande dia.
     Esperamos que vocês aproveitem e que seja um dia inesquecível.
     A presença de cada um de vocês é muito importante para nós!
-    <span class="sign">Carol e Caio</span>
+    <span class="sign">Caroline e Caio</span>
   </p>
 
   <div class="countdown-section">
@@ -513,7 +559,7 @@
 </section>
 
 <section id="galeria">
-  <h2 class="section-title">Galeria</h2>
+  <h2 class="section-title">Nossos momentos</h2>
   <div class="gallery-grid" id="galleryGrid"></div>
   <a href="#" class="btn" id="galleryMoreBtn" style="display:none;margin-top:40px;">Ver Mais Fotos</a>
 </section>
@@ -530,7 +576,32 @@
   <p>&copy; 2026 &mdash; Feito com amor para o nosso grande dia.</p>
 </footer>
 
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Fechar">&times;</button>
+  <button class="lightbox-prev" id="lightboxPrev" aria-label="Foto anterior">&#8249;</button>
+  <img id="lightboxImg" src="" alt="Foto do casal">
+  <button class="lightbox-next" id="lightboxNext" aria-label="Próxima foto">&#8250;</button>
+</div>
+
 <script>
+  // Animações de entrada ao rolar a página
+  var revealObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('in-view');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.15});
+  function observeReveal(el, idx){
+    el.classList.add('reveal');
+    el.style.transitionDelay = ((idx || 0) % 4) * 0.08 + 's';
+    revealObserver.observe(el);
+  }
+  document.querySelectorAll(
+    'section:not(#home) > *:not(.countdown-line), .story > *, #countdown > *'
+  ).forEach(observeReveal);
+
   // Menu mobile toggle
   document.getElementById('navToggle').addEventListener('click', function(){
     document.getElementById('navMenu').classList.toggle('open');
@@ -594,12 +665,16 @@
     function render(){
       grid.innerHTML = '';
       var visible = expanded ? allSrcs : allSrcs.slice(0, VISIBLE_LIMIT);
-      visible.forEach(function(src){
+      visible.forEach(function(src, idx){
         var el = document.createElement('img');
         el.src = src;
         el.alt = 'Foto do casal';
         el.loading = 'lazy';
+        el.addEventListener('click', function(){
+          openLightbox(allSrcs.indexOf(src));
+        });
         grid.appendChild(el);
+        observeReveal(el, idx);
       });
     }
     function tryLoad(){
@@ -624,6 +699,35 @@
       expanded = !expanded;
       moreBtn.textContent = expanded ? 'Ver Menos Fotos' : 'Ver Mais Fotos';
       render();
+    });
+
+    // Lightbox
+    var lightbox = document.getElementById('lightbox');
+    var lightboxImg = document.getElementById('lightboxImg');
+    var current = 0;
+    function openLightbox(idx){
+      current = idx;
+      lightboxImg.src = allSrcs[current];
+      lightbox.classList.add('open');
+    }
+    function closeLightbox(){
+      lightbox.classList.remove('open');
+    }
+    function showDelta(delta){
+      current = (current + delta + allSrcs.length) % allSrcs.length;
+      lightboxImg.src = allSrcs[current];
+    }
+    document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+    document.getElementById('lightboxPrev').addEventListener('click', function(){ showDelta(-1); });
+    document.getElementById('lightboxNext').addEventListener('click', function(){ showDelta(1); });
+    lightbox.addEventListener('click', function(e){
+      if(e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', function(e){
+      if(!lightbox.classList.contains('open')) return;
+      if(e.key === 'Escape') closeLightbox();
+      if(e.key === 'ArrowLeft') showDelta(-1);
+      if(e.key === 'ArrowRight') showDelta(1);
     });
   })();
 </script>
