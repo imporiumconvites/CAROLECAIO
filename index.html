@@ -77,7 +77,7 @@
     padding-bottom:12px;
   }
   nav a{
-    font-size:.72rem;
+    font-size:.756rem;
     font-weight:400;
     text-transform:uppercase;
     letter-spacing:.12em;
@@ -638,11 +638,11 @@
   updateCountdown();
   setInterval(updateCountdown, 1000*30);
 
-  // Vídeo do hero - usa assets/geral/hero.mp4 se o arquivo existir
+  // Vídeo do hero - usa assets/video/videoexemplo.mp4 se o arquivo existir
   (function(){
     var video = document.getElementById('heroVideo');
     var placeholder = document.querySelector('.hero-video-placeholder');
-    var src = 'assets/geral/hero.mp4';
+    var src = 'assets/video/videoexemplo.mp4';
     fetch(src, {method:'HEAD'}).then(function(res){
       if(res.ok){
         video.src = src;
