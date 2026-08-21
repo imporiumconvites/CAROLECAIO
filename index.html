@@ -127,10 +127,22 @@
       transition:max-height .3s ease;
       padding-bottom:0;
     }
-    nav ul.open{max-height:400px;padding-bottom:12px;background:rgba(20,18,15,.55);border-radius:0 0 6px 6px;}
-    header.scrolled nav ul.open{background:rgba(218,217,212,.98);}
-    nav ul li{width:100%;text-align:center;}
+    nav ul.open{
+      position:fixed;inset:0;
+      width:100vw;height:100vh;max-height:none;
+      background:#fff;
+      justify-content:center;align-items:flex-start;
+      gap:0;padding:0 40px;
+      z-index:200;
+    }
+    header.scrolled nav ul.open{background:#fff;}
+    nav ul li{width:100%;text-align:left;border-bottom:1px solid var(--line);}
+    nav ul.open li{width:100%;}
     nav ul a{display:block;padding:14px 0;}
+    nav ul.open a{color:var(--ink);font-size:1rem;letter-spacing:.15em;padding:20px 0;}
+    header .nav-toggle{position:relative;z-index:201;}
+    header.scrolled .nav-toggle,
+    body:has(nav ul.open) .nav-toggle{color:var(--ink);}
   }
 
   /* Hero */
@@ -677,7 +689,8 @@
 
   // Menu mobile toggle
   document.getElementById('navToggle').addEventListener('click', function(){
-    document.getElementById('navMenu').classList.toggle('open');
+    var open = document.getElementById('navMenu').classList.toggle('open');
+    this.innerHTML = open ? '&#10005;' : '&#9776;';
   });
 
   // Rolagem suave até cada seção ao clicar no menu
@@ -692,6 +705,7 @@
         window.scrollTo({top: top, behavior: 'smooth'});
       }
       document.getElementById('navMenu').classList.remove('open');
+      document.getElementById('navToggle').innerHTML = '&#9776;';
     });
   });
 
