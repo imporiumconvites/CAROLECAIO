@@ -8,6 +8,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&family=Alex+Brush&display=swap" rel="stylesheet">
 <style>
+  @font-face{
+    font-family:'Exmouth';
+    src:url('assets/fonte/exmouth_.ttf') format('truetype');
+    font-weight:normal;
+    font-style:normal;
+    font-display:swap;
+  }
   :root{
     --bg:#dad9d4;
     --ink:#696969;
@@ -29,7 +36,7 @@
     line-height:1.7;
   }
   h1,h2,h3,.script{
-    font-family:'Cormorant Garamond',serif;
+    font-family:'Exmouth','Cormorant Garamond',serif;
     font-weight:500;
     letter-spacing:.02em;
   }
@@ -177,7 +184,7 @@
   .section-title{
     text-align:center;
     margin-bottom:12px;
-    font-size:clamp(2rem,4vw,2.8rem);
+    font-size:clamp(2.3rem,4.5vw,3.2rem);
     color:var(--accent-dark);
   }
   .section-sub{
@@ -306,9 +313,9 @@
   /* Traje */
   #traje{text-align:center;}
   .traje-title{
-    font-family:'Alex Brush',cursive;
-    font-size:3rem;
-    color:var(--sage,#4a6449);
+    font-family:'Exmouth','Alex Brush',cursive;
+    font-size:3.4rem;
+    color:var(--accent-dark);
     margin-bottom:22px;
   }
   .traje-code{
@@ -325,6 +332,20 @@
   }
   .traje-illustration{
     max-width:220px;width:100%;margin:0 auto 40px;
+  }
+
+  /* Parallax */
+  .parallax{
+    padding:0;max-width:none;margin:0;
+    height:60vh;min-height:380px;
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+    border-top:none;
+  }
+  section.parallax::before{content:none;}
+  @media(max-width:800px){
+    .parallax{background-attachment:scroll;}
   }
 
   /* Galeria */
@@ -446,6 +467,8 @@
   <div class="divider"></div>
 </section>
 
+<section id="paralax" class="parallax" style="background-image:url('assets/geral/paralax.jpg');"></section>
+
 <section id="rsvp" class="gifts">
   <h2 class="section-title">Confirmação de Presença</h2>
   <div class="divider"></div>
@@ -528,17 +551,19 @@
   })();
 
   // Galeria - carrega automaticamente assets/galeria/foto01.jpg, foto02.jpg, ...
-  // Mostra só as 6 primeiras; se houver mais, exibe o botão "Ver Mais Fotos"
+  // Mostra só as 3 primeiras; se houver mais, alterna entre "Ver Mais Fotos" e "Ver Menos Fotos"
   (function(){
     var grid = document.getElementById('galleryGrid');
     var moreBtn = document.getElementById('galleryMoreBtn');
     var VISIBLE_LIMIT = 3;
-    var srcs = [];
+    var allSrcs = [];
+    var expanded = false;
     var i = 1;
     function pad(n){ return n < 10 ? '0' + n : String(n); }
     function render(){
       grid.innerHTML = '';
-      srcs.forEach(function(src){
+      var visible = expanded ? allSrcs : allSrcs.slice(0, VISIBLE_LIMIT);
+      visible.forEach(function(src){
         var el = document.createElement('img');
         el.src = src;
         el.alt = 'Foto do casal';
@@ -550,13 +575,12 @@
       var src = 'assets/galeria/foto' + pad(i) + '.jpg';
       var img = new Image();
       img.onload = function(){
-        srcs.push(src);
+        allSrcs.push(src);
         i++;
         tryLoad();
       };
       img.onerror = function(){
-        if(srcs.length > VISIBLE_LIMIT){
-          srcs.length = VISIBLE_LIMIT;
+        if(allSrcs.length > VISIBLE_LIMIT){
           moreBtn.style.display = 'inline-block';
         }
         render();
@@ -566,20 +590,9 @@
     tryLoad();
     moreBtn.addEventListener('click', function(e){
       e.preventDefault();
-      i = VISIBLE_LIMIT + 1;
-      moreBtn.style.display = 'none';
-      (function loadRest(){
-        var src = 'assets/galeria/foto' + pad(i) + '.jpg';
-        var img = new Image();
-        img.onload = function(){
-          srcs.push(src);
-          render();
-          i++;
-          loadRest();
-        };
-        img.onerror = function(){};
-        img.src = src;
-      })();
+      expanded = !expanded;
+      moreBtn.textContent = expanded ? 'Ver Menos Fotos' : 'Ver Mais Fotos';
+      render();
     });
   })();
 </script>
