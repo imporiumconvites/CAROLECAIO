@@ -563,7 +563,7 @@
     padding:0;max-width:none;margin:0;
     height:60vh;min-height:380px;
     overflow:hidden;
-    background-size:140% auto;
+    background-size:180% auto;
     background-position:center;
     background-attachment:scroll;
     border-top:none;
@@ -681,7 +681,7 @@
 </header>
 
 <section id="home" class="hero" style="padding:0;max-width:none;">
-  <div class="hero-video-placeholder">[ vídeo aqui ]</div>
+  <div class="hero-video-placeholder"></div>
   <video class="hero-video" id="heroVideo" autoplay muted loop playsinline></video>
   <div class="hero-overlay-text">
     <p class="eyebrow">Estamos nos casando</p>
@@ -813,7 +813,7 @@
         var winH = window.innerHeight;
         if(rect.bottom > 0 && rect.top < winH){
           var progress = (rect.top) / winH;
-          var offset = progress * 130;
+          var offset = progress * 200;
           el.style.backgroundPosition = 'center calc(50% + ' + offset + 'px)';
         }
       });
