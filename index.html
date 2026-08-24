@@ -383,19 +383,12 @@
     position:absolute;
     top:0;left:50%;
     transform:translate(-50%,-50%);
-    width:260px;
+    width:120px;
     height:1px;
     background:var(--accent-dark);
   }
   section:not(.hero)::after{
-    content:"\25C6\25C6\25C6";
-    display:block;
-    position:absolute;
-    top:0;left:50%;
-    transform:translate(-50%,-50%);
-    font-size:.85rem;
-    color:var(--accent-dark);
-    line-height:1;
+    content:none;
   }
   .hero{scroll-margin-top:0;}
   .intro{scroll-margin-top:120px;}
@@ -606,14 +599,14 @@
     position:relative;
     z-index:1;
   }
-  .traje-illustration-wrap::before{
+  .traje-halo{
     content:'';
     position:absolute;
     top:50%;left:50%;
     transform:translate(-50%,-50%);
     width:180%;height:180%;
     background:url('assets/geral/mancha.png') no-repeat center/contain;
-    opacity:.4;
+    opacity:.2;
     z-index:0;
   }
 
@@ -716,25 +709,19 @@
     color:var(--muted);
     font-size:.8rem;
     position:relative;
+    background:#bcb7aa;
   }
-  footer::before{
-    content:"";
-    position:absolute;
-    top:0;left:50%;
-    transform:translate(-50%,-50%);
-    width:260px;
-    height:1px;
-    background:var(--accent-dark);
-  }
+  footer::before{content:none;}
   footer::after{
-    content:"\25C6\25C6\25C6";
+    content:none;
+  }
+  .footer-brand{
     display:block;
-    position:absolute;
-    top:0;left:50%;
-    transform:translate(-50%,-50%);
-    font-size:.85rem;
-    color:var(--accent-dark);
-    line-height:1;
+    height:24.2px;
+    width:auto;
+    margin:18px auto 0;
+    filter:brightness(0) saturate(100%) invert(15%);
+    opacity:.85;
   }
   footer .script{
     font-size:1.8rem;
@@ -846,6 +833,7 @@
   <p class="traje-title">Traje</p>
   <p class="traje-code">Passeio Completo</p>
   <div class="traje-illustration-wrap">
+    <div class="traje-halo" aria-hidden="true"></div>
     <img class="traje-illustration" src="assets/geral/traje.webp" alt="Ilustração de traje" loading="lazy" decoding="async">
   </div>
 </section>
@@ -875,7 +863,8 @@
 
 <footer>
   <div class="script">Caroline &amp; Caio</div>
-  <p>&copy; 2026 &mdash; Feito com amor para o nosso grande dia.</p>
+  <p>Feito com amor para o nosso grande dia.</p>
+  <img src="assets/icone/imporium.png" alt="Imporium" class="footer-brand" loading="lazy" decoding="async">
 </footer>
 
 <div class="lightbox" id="lightbox">
