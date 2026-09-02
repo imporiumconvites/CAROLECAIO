@@ -324,8 +324,8 @@
   }
   section.welcome::before,
   section.welcome::after,
-  section#historia::before,
-  section#historia::after{
+  section#local::before,
+  section#local::after{
     content:none !important;
   }
   .welcome-text{
@@ -436,33 +436,6 @@
 
   /* Local do evento */
   #local{text-align:center;}
-  #local .eyebrow{
-    text-transform:uppercase;
-    letter-spacing:.3em;
-    font-size:.75rem;
-    margin-bottom:14px;
-    color:var(--accent);
-  }
-  .local-datetime{
-    font-family:'Inter',sans-serif;
-    font-weight:600;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-    font-size:1.05rem;
-    color:var(--accent-dark);
-    margin-bottom:40px;
-  }
-  .local-illustration{
-    max-width:420px;width:100%;margin:0 auto 36px;
-  }
-  .local-venue{
-    font-family:'Cormorant Garamond',serif;
-    font-style:italic;
-    font-size:1.6rem;
-    color:var(--ink);
-    margin-bottom:8px;
-  }
-  #local .section-sub{margin-bottom:36px;}
 
 
   .btn{
@@ -714,10 +687,10 @@
     .event-info h3{font-size:.95rem;}
     .event-info p{font-size:.92rem;margin-bottom:12px;}
 
-    #historia{display:flex;flex-direction:column;align-items:center;text-align:center;}
-    #historia .story{display:contents;}
-    #historia .event-info{display:contents;}
-    #historia .section-title{
+    #local{display:flex;flex-direction:column;align-items:center;text-align:center;}
+    #local .story{display:contents;}
+    #local .event-info{display:contents;}
+    #local .section-title{
       order:1;
       font-family:'Inter',sans-serif;
       font-weight:600;
@@ -727,9 +700,9 @@
       color:var(--accent-dark);
       margin-bottom:0;
     }
-    #historia .event-info h3{display:none;}
-    #historia .event-info-label{display:none;}
-    #historia .event-info p:first-of-type{
+    #local .event-info h3{display:none;}
+    #local .event-info-label{display:none;}
+    #local .event-info p:first-of-type{
       order:2;
       font-family:'Inter',sans-serif;
       font-weight:700;
@@ -739,8 +712,8 @@
       color:var(--ink);
       margin:14px 0 0;
     }
-    #historia .story img{order:3;max-width:209px;width:100%;margin:24px 0;}
-    #historia .event-info-note{
+    #local .story img{order:3;max-width:209px;width:100%;margin:24px 0;}
+    #local .event-info-note{
       order:5;
       font-family:'Cormorant Garamond',serif;
       font-style:italic;
@@ -749,8 +722,8 @@
       max-width:280px;
       margin:4px auto 28px;
     }
-    #historia .event-info-note br{display:none;}
-    #historia .event-info p:nth-of-type(3){
+    #local .event-info-note br{display:none;}
+    #local .event-info p:nth-of-type(3){
       order:4;
       font-family:'Cormorant Garamond',serif;
       font-style:italic;
@@ -759,11 +732,7 @@
       max-width:280px;
       margin:0 auto 4px;
     }
-    #historia .event-info .btn{order:6;}
-
-    .local-illustration{max-width:260px;margin-bottom:24px;}
-    .local-datetime{font-size:.9rem;margin-bottom:28px;}
-    .local-venue{font-size:1.3rem;}
+    #local .event-info .btn{order:6;}
 
     .traje-title{font-size:1.9rem;margin-bottom:10px;}
     p.section-eyebrow{font-size:1.9rem;margin-bottom:10px;}
@@ -797,7 +766,7 @@
     <nav>
       <ul id="navMenu">
         <li><a href="#home">Home</a></li>
-        <li><a href="#historia">Local</a></li>
+        <li><a href="#local">Local</a></li>
         <li><a href="#rsvp">RSVP</a></li>
         <li><a href="#traje">Traje</a></li>
         <!-- <li><a href="#galeria">Fotos</a></li> -->
@@ -860,7 +829,7 @@
   </div>
 </section>
 
-<section id="historia">
+<section id="local">
   <h2 class="section-title">Local do Evento</h2>
   <div class="story">
     <img src="assets/geral/sketch01.png" alt="Ilustração do local" loading="lazy" decoding="async">
